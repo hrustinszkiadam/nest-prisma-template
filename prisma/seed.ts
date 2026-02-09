@@ -1,0 +1,19 @@
+import 'dotenv/config';
+import { PrismaClient } from '../generated/prisma/client';
+import { PrismaMariaDb } from '@prisma/adapter-mariadb/';
+
+const prisma = new PrismaClient({
+  adapter: new PrismaMariaDb(process.env['DATABASE_URL'] as string),
+});
+
+async function main() {}
+
+main()
+  .then(async () => {
+    await prisma.$disconnect();
+  })
+  .catch(async (e) => {
+    console.error(e);
+    await prisma.$disconnect();
+    process.exit(1);
+  });
