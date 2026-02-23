@@ -6,7 +6,16 @@ const prisma = new PrismaClient({
   adapter: new PrismaMariaDb(process.env['DATABASE_URL'] as string),
 });
 
-async function main() {}
+async function main() {
+  await Promise.all(
+    Array.from({ length: 15 }).map((_, i) => {
+      // Upsert comes here
+      return new Promise((resolve) => {
+        resolve({});
+      });
+    }),
+  );
+}
 
 main()
   .then(async () => {
